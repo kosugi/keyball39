@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _MOD_K (RSFT_T(KC_K))
 #define _MOD_L (RALT_T(KC_L))
 
-//#define _LT1_m (LT(1,KC_MINS))
+#define _LT_MINS (LT(3,KC_MINS))
 
 #define _MOD_F6 (LALT_T(KC_F6))
 #define _MOD_F7 (LSFT_T(KC_F7))
@@ -41,7 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define _LT1 (LT(2,KC_TAB))
 #define _LT2 (SFT_T(KC_SPC))
-#define _LT3 (LT(3,KC_LNG1))
+#define _LT3 (LT(5,KC_LNG1))
 #define _RT1 (LT(1,KC_ENT))
 #define _RT2 (CTL_T(KC_SPC))
 #define _RT3 (_______)
@@ -51,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    KC_A     , _MOD_S   , _MOD_D   , _MOD_F   , KC_G     ,                            KC_H     , _MOD_J   , _MOD_K   , _MOD_L   , KC_MINS  ,
+    KC_A     , _MOD_S   , _MOD_D   , _MOD_F   , KC_G     ,                            KC_H     , _MOD_J   , _MOD_K   , _MOD_L   , _LT_MINS ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_ESC   , KC_BTN2  , KC_BTN1  , _LT1     , _LT2     , _LT3     ,      _RT1     , _RT2     , _RT3     , _______  , _______  , KC_LWIN
+    KC_ESC   , KC_LWIN  , KC_LALT  , _LT1     , _LT2     , _LT3     ,      _RT1     , _RT2     , _RT3     , XXXXXXX  , XXXXXXX  , KC_RWIN
   ),
 
   [1] = LAYOUT_universal(
@@ -71,9 +71,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
-    KC_F1    , KC_F2    , KC_F3    , KC_F4    , XXXXXXX  ,                            KC_HOME  , KC_PGUP  , KC_UP    , KC_PGDN  , KC_END   ,
-    KC_F5    , _MOD_F6  , _MOD_F7  , _MOD_F8  , XXXXXXX  ,                            KC_BSPC  , _MOD_LEFT, _MOD_DOWN, _MOD_RGHT, KC_DEL   ,
-    KC_F9    , KC_F10   , KC_F11   , KC_F12   , XXXXXXX  ,                            XXXXXXX  , KC_ENT   , XXXXXXX  , XXXXXXX  , KC_INS   ,
+    KC_F1    , KC_F2    , KC_F3    , KC_F4    , XXXXXXX  ,                            XXXXXXX  , KC_BTN4  , XXXXXXX  , KC_BTN5  , XXXXXXX  ,
+    KC_F5    , _MOD_F6  , _MOD_F7  , _MOD_F8  , XXXXXXX  ,                            XXXXXXX  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    KC_F9    , KC_F10   , KC_F11   , KC_F12   , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
+  ),
+
+  [4] = LAYOUT_universal(
+    XXXXXXX  , KC_BTN4  , XXXXXXX  , KC_BTN5  , XXXXXXX  ,                            XXXXXXX  , KC_BTN4  , XXXXXXX  , KC_BTN5  , XXXXXXX  ,
+    XXXXXXX  , KC_BTN2  , KC_BTN3  , KC_BTN1  , XXXXXXX  ,                            XXXXXXX  , KC_BTN1  , KC_BTN3  , KC_BTN2  , MO(5)    ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
+  ),
+
+  [5] = LAYOUT_universal(
+    XXXXXXX  , KC_BTN4  , XXXXXXX  , KC_BTN5  , XXXXXXX  ,                            KC_HOME  , KC_PGUP  , KC_UP    , KC_PGDN  , KC_END   ,
+    XXXXXXX  , KC_BTN2  , KC_BTN3  , KC_BTN1  , XXXXXXX  ,                            KC_BSPC  , _MOD_LEFT, _MOD_DOWN, _MOD_RGHT, KC_DEL   ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , KC_ENT   , XXXXXXX  , XXXXXXX  , KC_INS   ,
     _______  , _______  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
   )
 };
@@ -85,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == 3);
+    keyball_set_scroll_mode(get_highest_layer(state) == 5);
     return state;
 }
 
